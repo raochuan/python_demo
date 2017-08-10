@@ -196,44 +196,100 @@ import  functools
 # f1,f2,f3 = count()
 # print (f1(),f2())
 
-def log(func):
-	@functools.wraps(func)
-	def wrapper(*args,**kw):
-		print ('call %s():' % func.__name__)
-		return func(*args,**kw)
-	return  wrapper
-@log
-def now():
-	print ("2017-7-25")
+# def log(func):
+# 	@functools.wraps(func)
+# 	def wrapper(*args,**kw):
+# 		print ('call %s():' % func.__name__)
+# 		return func(*args,**kw)
+# 	return  wrapper
+# @log
+# def now():
+# 	print ("2017-7-25")
+#
+# @log
+# def test():
+# 	print ("test---log")
+# now();
+# test();
+#
+# print (now.__name__,test.__name__);
+#
+#
+# def log(text = '默认值'):
+# 	def decorator_test(func):
+# 		@functools.wraps(func)
+# 		def wrapper(*args,**kw):
+# 			print ('start有参数的logo %s-- %s():' %(text,func.__name__))
+# 			func(*args,**kw)
+# 			print ('end有参数的logo %s-- %s():' % (text, func.__name__))
+# 			return
+# 		return wrapper
+# 	return decorator_test
+#
+# @log()
+# def now():
+# 	print ("2017-7-25")
+#
+# @log('now_test')
+# def test():
+# 	print ("test---log")
+# now();
+# test();
+#
+# print (now.__name__,test.__name__);
+#
+# class Student(object):
+# 	def __init__(self,name,score):
+# 		self.name = name
+# 		self.score = score
+# 	def print_score(self):
+# 		print ('%s = %s' %(self.name,self.score))
+#
+#
+# s = Student("zhangsan",'1000')
+# s.print_score()
+#
+# print (s)
 
-@log
-def test():
-	print ("test---log")
-now();
-test();
+#
+# class Fib(object):
+# 	def __init__(self):
+# 		self.a,self.b = 0,1
+# 	def __iter__(self):
+# 		return  self
+# 	def __next__(self):
+# 		self.a,self.b = self.b,self.a + self.b
+# 		if self.a > 10000:
+# 			raise StopIteration()
+# 		return  self.a
+#
+# for n in Fib():
+# 	print (n)
 
-print (now.__name__,test.__name__);
+
+# class Student(object):
+# 	def __init__(self):
+# 		self.name = "zhangSan"
+# 	def __getattr__(self, item):
+# 		if item == 'age':
+# 			return  10
+#
+# s = Student()
+#
+# print (s.age)
+# print  (s.score)
 
 
-def log(text = '默认值'):
-	def decorator_test(func):
-		@functools.wraps(func)
-		def wrapper(*args,**kw):
-			print ('start有参数的logo %s-- %s():' %(text,func.__name__))
-			func(*args,**kw)
-			print ('end有参数的logo %s-- %s():' % (text, func.__name__))
-			return
-		return wrapper
-	return decorator_test
-
-@log()
-def now():
-	print ("2017-7-25")
-
-@log('now_test')
-def test():
-	print ("test---log")
-now();
-test();
-
-print (now.__name__,test.__name__);
+try:
+    print('try...')
+    r = 10 / int('2')
+    print('result:', r)
+except ValueError as e:
+    print('ValueError:', e)
+except ZeroDivisionError as e:
+    print('ZeroDivisionError:', e)
+else:
+    print('no error!')
+finally:
+    print('finally...')
+print('END')

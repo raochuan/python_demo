@@ -2,31 +2,34 @@
 import sys
 import requests
 import time
+import re
 from bs4 import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-base_url = 'http://www.jianshu.com'
-add_url = '/recommendations/notes'
+base_url = 'http://su.58.com'
+add_url = '/ershoushebei'
 num = 0
+page = 1
 nowtime = time.time()
 
 while(True):
     try:
-        if num > 1000:
+        if page > 5:
             break
         first_page = requests.request('get', base_url+ add_url).content
         soup = BeautifulSoup(first_page, "lxml")
-        title_list = [i.get_text() for i in soup.select("a.title")]
+        title_list = [i.get_text() for i in soup.select("a.t")]
         for i in title_list:
             num+=1
-            print(i)
+            print(i.replace('   ','0'))
         try:
-            nowtime = int(nowtime - 1800)
-            add_url = '/recommendations/notes?category_id=56&max_id=' + str(nowtime)
+            add_url = '/ershoushebei/pn2%d' % page
+            page += 1
         except:
             break
-        time.sleep(10)
+        time.sleep(5)
     except Exception as e:
         print(e)
         break
+
